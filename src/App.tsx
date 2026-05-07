@@ -226,7 +226,9 @@ function App() {
   const resolveDoctorImage = (imagePath?: string) => {
     if (!imagePath) return ''
     if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) return imagePath
-    return `http://localhost:5000${imagePath.startsWith('/') ? '' : '/'}${imagePath}`
+    // Extract base URL from API_BASE (remove /api at the end)
+    const baseUrl = API_BASE.replace('/api', '')
+    return `${baseUrl}${imagePath.startsWith('/') ? '' : '/'}${imagePath}`
   }
 
   const headers = useMemo<Record<string, string>>(() => {
